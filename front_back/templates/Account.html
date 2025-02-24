@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль</title>
+    <link rel="stylesheet" href="static/accountcss.css">
+</head>
+<body>
+    <div class="container" id="main-container">
+        <h2>Профіль</h2>
+        <p>Увійдіть або створіть обліковий запис, використовуючи email.</p>
+        
+        <div class="buttons">
+            <button class="login-btn" id="showLoginForm">Увійти</button>
+            <button class="register-btn" id="showRegisterForm">Створити акаунт</button>
+        </div>
+    </div>
+
+    <!-- Форма Авторизації -->
+    <div class="form-container" id="loginForm">
+        <h2>Авторизація</h2>
+        <input type="text" placeholder="Логін" id="login-username">
+        <input type="password" placeholder="Пароль" id="login-password">
+        <button class="submit-btn">Авторизуватись</button>
+        <button class="back-btn" id="backToMain1">Назад</button>
+    </div>
+
+    <!-- Форма Реєстрації -->
+    <div class="form-container" id="registerForm">
+        <h2>Створити акаунт</h2>
+        <input type="text" placeholder="Логін" id="register-username">
+        <input type="email" placeholder="Email" id="register-email">
+        <input type="password" placeholder="Пароль" id="register-password">
+        <button class="submit-btn">Створити акаунт</button>
+        <button class="back-btn" id="backToMain2">Назад</button>
+    </div>
+
+    <script src="static/script.js"></script> <!-- Підключаємо JavaScript -->
+</body>
+</html>

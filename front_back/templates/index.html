@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Авіакомпанія</title>
+  <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">UkrAirFly</div>
+    <nav class="nav-links">
+      <a href="#flights">Рейси</a>
+      <a href="#destinations">Напрямки</a>
+      <a href="#services">Послуги</a>
+      <a href="#contact">Контакти</a>
+    </nav>
+    <div class="login-container">
+      <a href="account" class="login-link">Увійти</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title">Подорожуйте з комфортом</h1>
+    <p class="hero-text">Бронюйте квитки по всьому світу за вигідними цінами.</p>
+    <button class="btn-primary">Забронювати рейс</button>
+  </section>
+
+  <div class="search-flights-container">
+    <section id="search" class="search-section">
+      <h2>Пошук рейсів</h2>
+      <form class="search-form">
+        <div class="input-group">
+          <label for="from">Звідки:</label>
+          <input type="text" id="from" name="from" placeholder="Звідки вилітаєте?" required>
+        </div>
+
+        <div class="input-group">
+          <label for="to">Куди:</label>
+          <input type="text" id="to" name="to" placeholder="Куди бажаєте полетіти" required>
+        </div>
+
+        <div class="input-group">
+          <label for="date-from">Туди:</label>
+          <input type="date" id="date-from" name="date-from" required>
+        </div>
+
+        <div class="input-group" id="date-back-group">
+          <label for="date-back">Назад:</label>
+          <input type="date" id="date-back" name="date-back">
+        </div>
+
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="trip" value="round-trip" checked>
+            Туди і назад
+          </label>
+          <label>
+            <input type="radio" name="trip" value="one-way" id="one-way">
+            В один бік
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary">Пошук</button>
+      </form>
+    </section>
+
+    <section id="flights" class="flights-section">
+      <h2>Популярні рейси</h2>
+      <div class="flights-list">
+        <div class="flight-card">
+          <h3>Київ - Лондон</h3>
+          <p>Від 200$</p>
+          <button class="btn-secondary">Детальніше</button>
+        </div>
+        <div class="flight-card">
+          <h3>Київ - Нью-Йорк</h3>
+          <p>Від 400$</p>
+          <button class="btn-secondary">Детальніше</button>
+        </div>
+        <div class="flight-card">
+          <h3>Київ - Токіо</h3>
+          <p>Від 500$</p>
+          <button class="btn-secondary">Детальніше</button>
+        </div>
+        <div class="flight-card">
+          <h3>Париж - Лос-Анджелес</h3>
+          <p>Від 450$</p>
+          <button class="btn-secondary">Детальніше</button>
+        </div>
+        <div class="flight-card">
+          <h3>Ніжин - Нью-Йорк</h3>
+          <p>Від 700$</p>
+          <button class="btn-secondary">Детальніше</button>
+        </div>
+        <div class="flight-card">
+          <h3>Рим - Барселона</h3>
+          <p>Від 150$</p>
+          <button class="btn-secondary">Детальніше</button>
+        </div>
+      </div>
+    </section>
+      </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>&copy; 2025 UkrAirFly. Усі права захищено.</p>
+      <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
+    </div>
+  </footer>
+  <script>
+ // Отримуємо елементи
+const oneWayRadio = document.getElementById('one-way');
+const roundTripRadio = document.getElementById('round-trip');
+const dateBackGroup = document.getElementById('date-back-group');
+const oneWayButton = document.getElementById('one-way-button');
+const roundTripButton = document.getElementById('round-trip-button');
+const dateBackInput = document.getElementById('date-back');
+
+// Функція для перемикання відображення поля "Назад"
+function toggleDateBack() {
+  if (oneWayRadio?.checked) {
+    dateBackGroup.style.display = 'none';
+    if (dateBackInput) dateBackInput.value = ""; // Очищуємо значення поля "Назад"
+  } else {
+    dateBackGroup.style.display = 'block';
+  }
+}
+
+// Додаємо обробник події для кнопки "В один бік"
+if (oneWayButton) {
+  oneWayButton.addEventListener('click', () => {
+    oneWayRadio.checked = true;
+    roundTripRadio.checked = false;
+    toggleDateBack();
+  });
+}
+
+// Додаємо обробник події для кнопки "Туди і назад"
+if (roundTripButton) {
+  roundTripButton.addEventListener('click', () => {
+    oneWayRadio.checked = false;
+    roundTripRadio.checked = true;
+    toggleDateBack();
+  });
+}
+
+// Додаємо слухач для зміни вибору між "В один бік" і "Туди і назад"
+const tripOptions = document.querySelectorAll('input[name="trip"]');
+tripOptions.forEach(option => {
+  option.addEventListener('change', toggleDateBack);
+});
+
+// Ініціалізація при завантаженні сторінки
+window.addEventListener('DOMContentLoaded', toggleDateBack);
+  </script>
+</body>
+</html>
