@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .models import Flight
+from .forms import FlightSearchForm
 
 def home_view(request):
     return render(request, "home.html")
@@ -41,3 +43,23 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+
+def search_flights(request):
+    form = FlightSearchForm(request.GET)
+    flights = Flight.objects.all()
+
+    if form.is_valid():
+        origin = form.cleaned_data.get('origin')
+        destination = form.cleaned_data.get('destination')
+        departure_date = form.cleaned_data.get('departure_date')
+
+        if origin:
+            flights = flights.filter(origin__icontains=origin)
+        if destination:
+            flights = flights.filter(destination__icontains=destination)
+        if departure_date:
+            flights = flights.filter(departure_time__date=departure_date)
+
+    return render(request, 'search_results.html', {'form': form, 'flights': flights})
+
