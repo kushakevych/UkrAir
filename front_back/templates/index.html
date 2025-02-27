@@ -61,7 +61,7 @@
           </label>
         </div>
 
-        <button type="submit" class="btn-primary">Пошук</button>
+        <button href="booking" type="submit" class="btn-primary">Пошук</button>
       </form>
     </section>
 
@@ -108,51 +108,43 @@
       <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
     </div>
   </footer>
+
   <script>
- // Отримуємо елементи
-const oneWayRadio = document.getElementById('one-way');
-const roundTripRadio = document.getElementById('round-trip');
-const dateBackGroup = document.getElementById('date-back-group');
-const oneWayButton = document.getElementById('one-way-button');
-const roundTripButton = document.getElementById('round-trip-button');
-const dateBackInput = document.getElementById('date-back');
+    // Отримуємо елементи
+    const oneWayRadio = document.getElementById('one-way');
+    const dateBackGroup = document.getElementById('date-back-group');
 
-// Функція для перемикання відображення поля "Назад"
-function toggleDateBack() {
-  if (oneWayRadio?.checked) {
-    dateBackGroup.style.display = 'none';
-    if (dateBackInput) dateBackInput.value = ""; // Очищуємо значення поля "Назад"
-  } else {
-    dateBackGroup.style.display = 'block';
-  }
-}
+    // Функція для приховування поля "Назад" при наведенні на "В один бік"
+    oneWayRadio.addEventListener('mouseover', () => {
+      dateBackGroup.style.display = 'none'; // Приховуємо поле
+    });
 
-// Додаємо обробник події для кнопки "В один бік"
-if (oneWayButton) {
-  oneWayButton.addEventListener('click', () => {
-    oneWayRadio.checked = true;
-    roundTripRadio.checked = false;
-    toggleDateBack();
-  });
-}
+    // Функція для відновлення поля "Назад" при виході з кнопки "В один бік"
+    oneWayRadio.addEventListener('mouseout', () => {
+      if (!oneWayRadio.checked) {
+        dateBackGroup.style.display = 'block'; // Відновлюємо поле
+      }
+    });
 
-// Додаємо обробник події для кнопки "Туди і назад"
-if (roundTripButton) {
-  roundTripButton.addEventListener('click', () => {
-    oneWayRadio.checked = false;
-    roundTripRadio.checked = true;
-    toggleDateBack();
-  });
-}
+    // Додаємо слухач для зміни вибору між "В один бік" і "Туди і назад"
+    const tripOptions = document.querySelectorAll('input[name="trip"]');
+    tripOptions.forEach(option => {
+      option.addEventListener('change', () => {
+        // Якщо вибрано "В один бік", приховуємо поле "Назад"
+        if (oneWayRadio.checked) {
+          dateBackGroup.style.display = 'none';
+        } else {
+          dateBackGroup.style.display = 'block';
+        }
+      });
+    });
 
-// Додаємо слухач для зміни вибору між "В один бік" і "Туди і назад"
-const tripOptions = document.querySelectorAll('input[name="trip"]');
-tripOptions.forEach(option => {
-  option.addEventListener('change', toggleDateBack);
-});
-
-// Ініціалізація при завантаженні сторінки
-window.addEventListener('DOMContentLoaded', toggleDateBack);
+    // Ініціалізація відразу при завантаженні сторінки
+    window.addEventListener('DOMContentLoaded', () => {
+      if (oneWayRadio.checked) {
+        dateBackGroup.style.display = 'none'; // Приховуємо "Назад", якщо вибрано "В один бік"
+      }
+    });
   </script>
 </body>
 </html>

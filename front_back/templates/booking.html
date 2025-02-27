@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Авіакомпанія</title>
-  <link rel="stylesheet" href="static/bok.css">
+  <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
   <header class="navbar">
@@ -19,30 +19,63 @@
       <a href="account" class="login-link">Увійти</a>
     </div>
   </header>
-  
-  <div class="ticket-container">
-    <div class="ticket">
-      <div class="date">Квітень 18, пт.</div>
-      <div class="price">від 191 €</div>
-      <img src="static/images/raeir.jpg" alt="Flight Image" class="flight-image">
-      <div class="flight-details">
-          Туди: Лісабон - Кишинів <br>
-          3г 25хв <br>
-          LIS (Лісабон) 18:15 - RMO (Кишинів) 00:40 <br>
-          Літак U5452, Boeing 737-700 NG
-      </div>
-      <a href="#" class="button">Обрати</a>
-    </div>
-    <div class="ticket">
-      <div class="date">Квітень 25, пт.</div>
-      <div class="price">від 181 €</div>
-      <div class="flight-details">
-          Назад: Рейс не вибрано <br>
-          Пропозиція про зворотній рейс <br>
-          Кишинів - Лісабон від 168 €
-      </div>
-      <a href="#" class="button">Обрати зворотній рейс</a>
+
+  <section class="hero">
+    <h1 class="hero-title">Подорожуйте з комфортом</h1>
+    <p class="hero-text">Бронюйте квитки по всьому світу за вигідними цінами.</p>
+    <button class="btn-primary" id="search-btn">Пошук</button>
+  </section>
+
+  <div id="search-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2 id="route-text"></h2>
+      <p id="date-text">24 лютого</p>
+      <button class="btn-secondary">Редагувати пошук</button>
+      <div id="dates-list"></div>
+      <p id="train-info"></p>
+      <label><input type="checkbox"> З пересадками</label>
+      <label><input type="checkbox"> Без вільних місць</label>
     </div>
   </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>&copy; 2025 UkrAirFly. Усі права захищено.</p>
+      <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('search-btn').addEventListener('click', function() {
+      const from = document.getElementById('from').value || 'Місце вильоту';
+      const to = document.getElementById('to').value || 'Місце прибуття';
+      const modal = document.getElementById('search-modal');
+      const routeText = document.getElementById('route-text');
+      const datesList = document.getElementById('dates-list');
+      const trainInfo = document.getElementById('train-info');
+
+      routeText.innerHTML = `${from} → ${to}`;
+      datesList.innerHTML = '';
+      
+      const days = ['субота', 'неділя', 'понеділок', 'вівторок', 'середа'];
+      const dateBase = 23;
+      for (let i = 0; i < days.length; i++) {
+        const dateElement = document.createElement('p');
+        dateElement.textContent = `${days[i]} ${dateBase + i} лютого`;
+        datesList.appendChild(dateElement);
+      }
+
+      const randomTrains = Math.floor(Math.random() * 50) + 10;
+      const randomPrice = Math.floor(Math.random() * 200) + 100;
+      trainInfo.textContent = `${randomTrains} потягів від ${randomPrice} ₴`;
+
+      modal.classList.remove('hidden');
+    });
+
+    document.querySelector('.close-btn').addEventListener('click', function() {
+      document.getElementById('search-modal').classList.add('hidden');
+    });
+  </script>
 </body>
 </html>
