@@ -1,10 +1,10 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Geologica", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #f5f5f5;
-  color: #333;
+  color: #242424;
 }
 
 .flights-section {
@@ -40,7 +40,7 @@ body {
 
 .btn-secondary {
   padding: 8px 16px;
-  background-color: #007bff;
+  background-color: #001226;
   color: #fff;
   border: none;
   font-size: 14px;
@@ -51,7 +51,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background-color: #0056b3;
+  background-color: #242424;
 }
 
 /* Адаптивність для мобільних пристроїв */
@@ -72,7 +72,6 @@ header.navbar {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #004a87;
   color: #fff;
 }
 
@@ -99,21 +98,22 @@ header.navbar {
 .login-container {
   display: flex;
   align-items: center;
+  margin-right: 20px;
 }
 
 .login-link {
-  color: #fff;
+  color: #000000;
   font-weight: 600;
   text-decoration: none;
   margin-left: 20px;
   padding: 8px 16px;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #ffffff;
   transition: background-color 0.3s;
 }
 
 .login-link:hover {
-  background-color: #0056b3;
+  background-color: #b4b4b4;
 }
 
 .menu-icon {
@@ -124,24 +124,26 @@ header.navbar {
 }
 
 .hero {
-  text-align: center;
-  padding: 80px 20px;
+  padding-left: 20px;
+  padding: 20px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.36)), url('images/flying.jpg');
   background-size: cover;
   background-position: center;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .hero-title {
-  font-size: 36px;
+  font-size: 76px;
   margin-bottom: 20px;
+  margin-left: 40px;
   color: #ffffff;
   font-weight: bold;
 }
 
 .hero-text {
-  font-size: 18px;
+  font-size: 28px;
   margin-bottom: 30px;
+  margin-left: 40px;
   color: #ffffff;
   font-weight: bold;
 }
@@ -153,40 +155,47 @@ header.navbar {
   border: none;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 25px;
 }
 
 .btn-primary:hover {
   background-color: #003366;
 }
 
-.search-flights-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px 20px;
-  gap: 20px;
-}
-
 .search-section {
   flex: 1;
-  max-width: 400px;
-  background-color: #f9f9f9;
+  max-width: 83%;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+  border-radius: 25px;
+}
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 40px;
+  padding: 20px;
+  background-color: #ffffffdd;
+  border-radius: 25px;
 }
 
-.search-form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.trip-options {
+  display: flex;
+  gap: 15px;
+}
+
+.selected-trip {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.trip {
+  cursor: pointer;
+}
+
+.search-fields {
+  display: flex;
+  gap: 10px;
 }
 
 .input-group {
@@ -199,17 +208,18 @@ header.navbar {
 .search-form input[type="date"] {
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 2px solid #ddd;
+  border-radius: 15px;
   font-size: 1rem;
   color: #333;
   width: 100%;
+  font-family: "Geologica", sans-serif;
 }
 
 .search-form input[type="text"]:focus,
 .search-form input[type="date"]:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #000000;
 }
 
 .radio-group {
@@ -220,18 +230,15 @@ header.navbar {
 }
 
 .search-form button {
-  padding: 12px 25px;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 15px;
   cursor: pointer;
-  background-color: #4CAF50;
+  background-color: #4578a0;
   color: #fff;
-  grid-column: span 2;
 }
 
 .search-form button:hover {
-  background-color: #45a049;
+  background-color: #396689;
 }
 
 footer.footer {

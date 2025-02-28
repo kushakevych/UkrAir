@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Авіакомпанія</title>
-  <link rel="stylesheet" href="static/styles.css">
+  <link rel="stylesheet" href="static/bok.css">
 </head>
 <body>
   <header class="navbar">
-    <div class="logo">UkrAirFly</div>
+    <div class="logo-container">
+      <div class="logo">UkrAirFly</div>
+    </div>
     <nav class="nav-links">
       <a href="#flights">Рейси</a>
       <a href="#destinations">Напрямки</a>
@@ -19,63 +21,217 @@
       <a href="account" class="login-link">Увійти</a>
     </div>
   </header>
+  <div class="route-info">Київ-Пас → Львів, 24 лютого</div>
 
-  <section class="hero">
-    <h1 class="hero-title">Подорожуйте з комфортом</h1>
-    <p class="hero-text">Бронюйте квитки по всьому світу за вигідними цінами.</p>
-    <button class="btn-primary" id="search-btn">Пошук</button>
-  </section>
-
-  <div id="search-modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2 id="route-text"></h2>
-      <p id="date-text">24 лютого</p>
-      <button class="btn-secondary">Редагувати пошук</button>
-      <div id="dates-list"></div>
-      <p id="train-info"></p>
-      <label><input type="checkbox"> З пересадками</label>
-      <label><input type="checkbox"> Без вільних місць</label>
+  <div class="content-container">
+    <div class="ticket-info">2 рейси від 251 ₴</div>
+    <div class="calendar">
+      <div class="calendar-header">
+        <span class="calendar-title">Березня 2025</span>
+      </div>
+      <div class="calendar-body">
+        <div class="calendar-day">
+          <span class="date">24</span>
+          <span class="weekday">Понеділок</span>
+        </div>
+        <div class="calendar-day">
+          <span class="date">25</span>
+          <span class="weekday">Вівторок</span>
+        </div>
+        <div class="calendar-day">
+          <span class="date">26</span>
+          <span class="weekday">Середа</span>
+        </div>
+        <div class="calendar-day">
+          <span class="date">27</span>
+          <span class="weekday">Четвер</span>
+        </div>
+        <div class="calendar-day">
+          <span class="date">28</span>
+          <span class="weekday">Пʼятниця</span>
+        </div>
+      </div>
     </div>
   </div>
-
+  <div class="tickets-container">
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-time">02:56</span>
+        <span class="ticket-duration">8 год 25 хв</span>
+        <span class="ticket-date">25 лютого</span>
+      </div>
+      <div class="ticket-route">
+        <span class="ticket-route-from">Київ-Пас</span> → <span class="ticket-route-to">Львів</span>
+      </div>
+      <div class="ticket-alternate">
+        <span class="ticket-alternate-from">Харків-Пас</span> → <span class="ticket-alternate-to">Львів</span>
+      </div>
+      <div class="ticket-footer">
+        <span class="ticket-price">697 ₴</span>
+      </div>
+    </div>
+  
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-time">04:10</span>
+        <span class="ticket-duration">6 год 55 хв</span>
+        <span class="ticket-date">25 лютого</span>
+      </div>
+      <div class="ticket-route">
+        <span class="ticket-route-from">Одеса</span> → <span class="ticket-route-to">Львів</span>
+      </div>
+      <div class="ticket-alternate">
+        <span class="ticket-alternate-from">Дніпро</span> → <span class="ticket-alternate-to">Львів</span>
+      </div>
+      <div class="ticket-footer">
+        <span class="ticket-price">850 ₴</span>
+      </div>
+    </div>
+  
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-time">06:30</span>
+        <span class="ticket-duration">7 год 10 хв</span>
+        <span class="ticket-date">25 лютого</span>
+      </div>
+      <div class="ticket-route">
+        <span class="ticket-route-from">Харків</span> → <span class="ticket-route-to">Львів</span>
+      </div>
+      <div class="ticket-alternate">
+        <span class="ticket-alternate-from">Запоріжжя</span> → <span class="ticket-alternate-to">Львів</span>
+      </div>
+      <div class="ticket-footer">
+        <span class="ticket-price">920 ₴</span>
+      </div>
+    </div>
+  
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-time">08:20</span>
+        <span class="ticket-duration">5 год 45 хв</span>
+        <span class="ticket-date">25 лютого</span>
+      </div>
+      <div class="ticket-route">
+        <span class="ticket-route-from">Полтава</span> → <span class="ticket-route-to">Львів</span>
+      </div>
+      <div class="ticket-alternate">
+        <span class="ticket-alternate-from">Вінниця</span> → <span class="ticket-alternate-to">Львів</span>
+      </div>
+      <div class="ticket-footer">
+        <span class="ticket-price">750 ₴</span>
+      </div>
+    </div>
+  
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-time">10:00</span>
+        <span class="ticket-duration">6 год 30 хв</span>
+        <span class="ticket-date">25 лютого</span>
+      </div>
+      <div class="ticket-route">
+        <span class="ticket-route-from">Чернівці</span> → <span class="ticket-route-to">Львів</span>
+      </div>
+      <div class="ticket-alternate">
+        <span class="ticket-alternate-from">Рівне</span> → <span class="ticket-alternate-to">Львів</span>
+      </div>
+      <div class="ticket-footer">
+        <span class="ticket-price">800 ₴</span>
+      </div>
+    </div>
+  
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-time">12:15</span>
+        <span class="ticket-duration">7 год 50 хв</span>
+        <span class="ticket-date">25 лютого</span>
+      </div>
+      <div class="ticket-route">
+        <span class="ticket-route-from">Донецьк</span> → <span class="ticket-route-to">Львів</span>
+      </div>
+      <div class="ticket-alternate">
+        <span class="ticket-alternate-from">Миколаїв</span> → <span class="ticket-alternate-to">Львів</span>
+      </div>
+      <div class="ticket-footer">
+        <span class="ticket-price">900 ₴</span>
+      </div>
+    </div>
+  </div>
   <footer class="footer">
     <div class="footer-bottom">
       <p>&copy; 2025 UkrAirFly. Усі права захищено.</p>
       <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
     </div>
   </footer>
+  <!-- Форма бронювання -->
+<div class="booking-modal">
+  <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="ticket-price-info">
+          Базова ціна: <span class="ticket-price-value"></span> ₴
+      </div>
 
-  <script>
-    document.getElementById('search-btn').addEventListener('click', function() {
-      const from = document.getElementById('from').value || 'Місце вильоту';
-      const to = document.getElementById('to').value || 'Місце прибуття';
-      const modal = document.getElementById('search-modal');
-      const routeText = document.getElementById('route-text');
-      const datesList = document.getElementById('dates-list');
-      const trainInfo = document.getElementById('train-info');
+      <h3>Додаткові послуги</h3>
 
-      routeText.innerHTML = `${from} → ${to}`;
-      datesList.innerHTML = '';
-      
-      const days = ['субота', 'неділя', 'понеділок', 'вівторок', 'середа'];
-      const dateBase = 23;
-      for (let i = 0; i < days.length; i++) {
-        const dateElement = document.createElement('p');
-        dateElement.textContent = `${days[i]} ${dateBase + i} лютого`;
-        datesList.appendChild(dateElement);
-      }
+      <div class="extra-options">
+          <label><input type="checkbox" data-price="30"> Вода негазована (+30 ₴)</label>
+          <label><input type="checkbox" data-price="170"> Ланч з рибою та булгуром (+170 ₴)</label>
+          <label><input type="checkbox" data-price="160"> Ланч з куркою карі та рисом (+160 ₴)</label>
+          <label><input type="checkbox" data-price="18.79"> Квиток на багаж (+18.79 ₴)</label>
+          <label><input type="checkbox" data-price="18.79"> Квиток на улюбленця (+18.79 ₴)</label>
+      </div>
 
-      const randomTrains = Math.floor(Math.random() * 50) + 10;
-      const randomPrice = Math.floor(Math.random() * 200) + 100;
-      trainInfo.textContent = `${randomTrains} потягів від ${randomPrice} ₴`;
+      <div class="total-price">
+          Загальна сума: <span class="total-price-value"></span> ₴
+      </div>
 
-      modal.classList.remove('hidden');
-    });
+      <button class="continue-btn">Забронювати</button>
+  </div>
+</div>
 
-    document.querySelector('.close-btn').addEventListener('click', function() {
-      document.getElementById('search-modal').classList.add('hidden');
-    });
-  </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tickets = document.querySelectorAll(".ticket-card");
+  const modal = document.querySelector(".booking-modal");
+  const priceSpan = document.querySelector(".ticket-price-value");
+  const totalPriceSpan = document.querySelector(".total-price-value");
+  const checkboxes = document.querySelectorAll(".extra-options input[type='checkbox']");
+  const closeButton = document.querySelector(".close-btn");
+
+  let basePrice = 0;
+
+  // Відкриття модального вікна
+  tickets.forEach(ticket => {
+      ticket.addEventListener("click", function () {
+          basePrice = parseFloat(this.querySelector(".ticket-price").textContent);
+          priceSpan.textContent = basePrice;
+          totalPriceSpan.textContent = basePrice.toFixed(2);
+          modal.classList.add("show");
+
+          // Скидання вибраних опцій
+          checkboxes.forEach(cb => cb.checked = false);
+      });
+  });
+
+  // Закриття модального вікна
+  closeButton.addEventListener("click", function () {
+      modal.classList.remove("show");
+  });
+
+  // Оновлення ціни при виборі додаткових послуг
+  checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("change", function () {
+          let totalPrice = basePrice;
+          checkboxes.forEach(cb => {
+              if (cb.checked) {
+                  totalPrice += parseFloat(cb.dataset.price);
+              }
+          });
+          totalPriceSpan.textContent = totalPrice.toFixed(2);
+      });
+  });
+});
+</script>
+
+</script>
 </body>
 </html>

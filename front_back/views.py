@@ -6,7 +6,7 @@ from .models import Flight
 from .forms import FlightSearchForm
 
 def home_view(request):
-    return render(request, "home.html")
+    return render(request, "index.html")
 
 def login_view(request):
     if request.method == "POST":

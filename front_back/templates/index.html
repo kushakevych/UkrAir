@@ -3,104 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <title>Авіакомпанія</title>
   <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">UkrAirFly</div>
-    <nav class="nav-links">
-      <a href="#flights">Рейси</a>
-      <a href="#destinations">Напрямки</a>
-      <a href="#services">Послуги</a>
-      <a href="#contact">Контакти</a>
-    </nav>
-    <div class="login-container">
-      <a href="account" class="login-link">Увійти</a>
-    </div>
-  </header>
-
   <section class="hero">
+    <div style="margin-left: 80px; margin-right: 80px;">
+    <div>
+      <header class="navbar">
+        <div class="logo"><img src="static/images/logo.svg" width="200" height="50"></div>
+        <nav class="nav-links">
+          <a href="#flights">Рейси</a>
+          <a href="#destinations">Напрямки</a>
+          <a href="#services">Послуги</a>
+          <a href="#contact">Контакти</a>
+        </nav>
+        <div class="login-container">
+          <a href="account" class="login-link">Увійти</a>
+        </div>
+      </header>
+    </div>
+
     <h1 class="hero-title">Подорожуйте з комфортом</h1>
     <p class="hero-text">Бронюйте квитки по всьому світу за вигідними цінами.</p>
-    <button class="btn-primary">Забронювати рейс</button>
-  </section>
 
-  <div class="search-flights-container">
-    <section id="search" class="search-section">
-      <h2>Пошук рейсів</h2>
+    <section id="search" style="margin-top: 100px;">
       <form class="search-form">
-        <div class="input-group">
-          <label for="from">Звідки:</label>
-          <input type="text" id="from" name="from" placeholder="Звідки вилітаєте?" required>
-        </div>
-
-        <div class="input-group">
-          <label for="to">Куди:</label>
-          <input type="text" id="to" name="to" placeholder="Куди бажаєте полетіти" required>
-        </div>
-
-        <div class="input-group">
-          <label for="date-from">Туди:</label>
-          <input type="date" id="date-from" name="date-from" required>
-        </div>
-
-        <div class="input-group" id="date-back-group">
-          <label for="date-back">Назад:</label>
-          <input type="date" id="date-back" name="date-back">
-        </div>
-
-        <div class="radio-group">
-          <label>
-            <input type="radio" name="trip" value="round-trip" checked>
+        <div class="trip-options">
+          <label class="selected-trip">
             Туди і назад
           </label>
-          <label>
-            <input type="radio" name="trip" value="one-way" id="one-way">
+          <label class="trip">
             В один бік
           </label>
         </div>
-
-        <button href="booking" type="submit" class="btn-primary">Пошук</button>
-      </form>
+      
+        <div class="search-fields">
+          <input type="text" id="from" name="from" placeholder="Звідки" required>
+          <input type="text" id="to" name="to" placeholder="Куди" required>
+          <input type="text" class="first-date" id="custom-date" required>
+          <input type="text" class="second-date" id="custom-date">
+          <button type="submit" class="btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </form>      
     </section>
+    </div>
+  </section>
 
-    <section id="flights" class="flights-section">
-      <h2>Популярні рейси</h2>
-      <div class="flights-list">
-        <div class="flight-card">
-          <h3>Київ - Лондон</h3>
-          <p>Від 200$</p>
-          <button class="btn-secondary">Детальніше</button>
-        </div>
-        <div class="flight-card">
-          <h3>Київ - Нью-Йорк</h3>
-          <p>Від 400$</p>
-          <button class="btn-secondary">Детальніше</button>
-        </div>
-        <div class="flight-card">
-          <h3>Київ - Токіо</h3>
-          <p>Від 500$</p>
-          <button class="btn-secondary">Детальніше</button>
-        </div>
-        <div class="flight-card">
-          <h3>Париж - Лос-Анджелес</h3>
-          <p>Від 450$</p>
-          <button class="btn-secondary">Детальніше</button>
-        </div>
-        <div class="flight-card">
-          <h3>Ніжин - Нью-Йорк</h3>
-          <p>Від 700$</p>
-          <button class="btn-secondary">Детальніше</button>
-        </div>
-        <div class="flight-card">
-          <h3>Рим - Барселона</h3>
-          <p>Від 150$</p>
-          <button class="btn-secondary">Детальніше</button>
-        </div>
+  <section id="flights" class="flights-section">
+    <h2>Популярні рейси</h2>
+    <div class="flights-list">
+      <div class="flight-card">
+        <h3>Київ - Лондон</h3>
+        <p>Від 200$</p>
+        <button class="btn-secondary">Детальніше</button>
       </div>
-    </section>
+      <div class="flight-card">
+        <h3>Київ - Нью-Йорк</h3>
+        <p>Від 400$</p>
+        <button class="btn-secondary">Детальніше</button>
       </div>
+      <div class="flight-card">
+        <h3>Київ - Токіо</h3>
+        <p>Від 500$</p>
+        <button class="btn-secondary">Детальніше</button>
+      </div>
+      <div class="flight-card">
+        <h3>Париж - Лос-Анджелес</h3>
+        <p>Від 450$</p>
+        <button class="btn-secondary">Детальніше</button>
+      </div>
+      <div class="flight-card">
+        <h3>Ніжин - Нью-Йорк</h3>
+        <p>Від 700$</p>
+        <button class="btn-secondary">Детальніше</button>
+      </div>
+      <div class="flight-card">
+        <h3>Рим - Барселона</h3>
+        <p>Від 150$</p>
+        <button class="btn-secondary">Детальніше</button>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="footer-bottom">
@@ -108,43 +96,48 @@
       <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
     </div>
   </footer>
-
-  <script>
-    // Отримуємо елементи
-    const oneWayRadio = document.getElementById('one-way');
-    const dateBackGroup = document.getElementById('date-back-group');
-
-    // Функція для приховування поля "Назад" при наведенні на "В один бік"
-    oneWayRadio.addEventListener('mouseover', () => {
-      dateBackGroup.style.display = 'none'; // Приховуємо поле
-    });
-
-    // Функція для відновлення поля "Назад" при виході з кнопки "В один бік"
-    oneWayRadio.addEventListener('mouseout', () => {
-      if (!oneWayRadio.checked) {
-        dateBackGroup.style.display = 'block'; // Відновлюємо поле
-      }
-    });
-
-    // Додаємо слухач для зміни вибору між "В один бік" і "Туди і назад"
-    const tripOptions = document.querySelectorAll('input[name="trip"]');
-    tripOptions.forEach(option => {
-      option.addEventListener('change', () => {
-        // Якщо вибрано "В один бік", приховуємо поле "Назад"
-        if (oneWayRadio.checked) {
-          dateBackGroup.style.display = 'none';
-        } else {
-          dateBackGroup.style.display = 'block';
-        }
-      });
-    });
-
-    // Ініціалізація відразу при завантаженні сторінки
-    window.addEventListener('DOMContentLoaded', () => {
-      if (oneWayRadio.checked) {
-        dateBackGroup.style.display = 'none'; // Приховуємо "Назад", якщо вибрано "В один бік"
-      }
-    });
-  </script>
 </body>
 </html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const roundTripLabel = document.querySelector(".selected-trip");
+    const oneWayLabel = document.querySelector(".trip");
+    const secondDateInput = document.querySelector(".second-date");
+
+    function toggleTripSelection() {
+        roundTripLabel.classList.toggle("selected-trip");
+        roundTripLabel.classList.toggle("trip");
+        oneWayLabel.classList.toggle("selected-trip");
+        oneWayLabel.classList.toggle("trip");
+    }
+
+    oneWayLabel.addEventListener("click", function () {
+        secondDateInput.style.display = "none";
+        toggleTripSelection();
+    });
+
+    roundTripLabel.addEventListener("click", function () {
+        secondDateInput.style.display = "block";
+        toggleTripSelection();
+    });
+  });
+</script>
+
+<script>
+  flatpickr("#custom-date", {
+    dateFormat: "d F Y", // 28 February 2025
+    defaultDate: new Date(),
+    minDate: "today",
+    locale: {
+      weekdays: {
+        shorthand: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+        longhand: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П’ятниця", "Субота"]
+      },
+      months: {
+        shorthand: ["Січ", "Лют", "Бер", "Кві", "Тра", "Чер", "Лип", "Сер", "Вер", "Жов", "Лис", "Гру"],
+        longhand: ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня", "Серпня", "Вересня", "Жовтня", "Листопада", "Грудня"]
+      }
+    }
+  });
+</script>
