@@ -1,5 +1,11 @@
 # UkrAir
 
+## superuser
+
+```
+user: admin
+password: admin
+```
 
 ## Проектування архітектури бази даних
 
