@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <title>Авіакомпанія</title>
-  <link rel="stylesheet" href="static/styles.css">
+  <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
   <section class="hero">
     <div style="margin-left: 80px; margin-right: 80px;">
     <div>
       <header class="navbar">
-        <div class="logo"><img src="static/images/logo.svg" width="200" height="50"></div>
+        <div class="logo"><img src="/static/images/logo.svg" width="200" height="50"></div>
         <nav class="nav-links">
           <a href="#flights">Рейси</a>
           <a href="#destinations">Напрямки</a>
@@ -23,16 +23,19 @@
           <a href="#contact">Контакти</a>
         </nav>
         <div class="login-container">
-          <a href="account" class="login-link">Увійти</a>
+          {% if user.is_authenticated %}
+           <a href="{% url 'profile' %}" class="login-link">Профіль</a>
+          {% else %}
+           <a href="{% url 'account' %}" class="login-link">Увійти</a>
+          {% endif %}
         </div>
       </header>
     </div>
 
     <h1 class="hero-title">Подорожуйте з комфортом</h1>
     <p class="hero-text">Бронюйте квитки по всьому світу за вигідними цінами.</p>
-
     <section id="search" style="margin-top: 100px;">
-      <form class="search-form">
+      <form class="search-form" method="get" action="{% url 'book_flight' %}">
         <div class="trip-options">
           <label class="selected-trip">
             Туди і назад
@@ -40,12 +43,15 @@
           <label class="trip">
             В один бік
           </label>
+          {% if error %}
+          <div style="color: red;">{{ error }}</div>
+          {% endif %}
         </div>
       
         <div class="search-fields">
-          <input type="text" id="from" name="from" placeholder="Звідки" required>
-          <input type="text" id="to" name="to" placeholder="Куди" required>
-          <input type="text" class="first-date" id="custom-date" required>
+          <input type="text" id="from" name="departure" placeholder="Звідки" required>
+          <input type="text" id="to" name="arrival" placeholder="Куди" required>
+          <input type="text" class="first-date" id="custom-date" name="date" required>
           <input type="text" class="second-date" id="custom-date">
           <button type="submit" class="btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
@@ -57,36 +63,15 @@
   <section id="flights" class="flights-section">
     <h2>Популярні рейси</h2>
     <div class="flights-list">
-      <div class="flight-card">
-        <h3>Київ - Лондон</h3>
-        <p>Від 200$</p>
-        <button class="btn-secondary">Детальніше</button>
-      </div>
-      <div class="flight-card">
-        <h3>Київ - Нью-Йорк</h3>
-        <p>Від 400$</p>
-        <button class="btn-secondary">Детальніше</button>
-      </div>
-      <div class="flight-card">
-        <h3>Київ - Токіо</h3>
-        <p>Від 500$</p>
-        <button class="btn-secondary">Детальніше</button>
-      </div>
-      <div class="flight-card">
-        <h3>Париж - Лос-Анджелес</h3>
-        <p>Від 450$</p>
-        <button class="btn-secondary">Детальніше</button>
-      </div>
-      <div class="flight-card">
-        <h3>Ніжин - Нью-Йорк</h3>
-        <p>Від 700$</p>
-        <button class="btn-secondary">Детальніше</button>
-      </div>
-      <div class="flight-card">
-        <h3>Рим - Барселона</h3>
-        <p>Від 150$</p>
-        <button class="btn-secondary">Детальніше</button>
-      </div>
+        {% for route in popular_routes %}
+        <div class="flight-card">
+            <h3>{{ route.departure.city }} - {{ route.arrival.city }}</h3>
+            <p>Від {{ route.flights_number|slice:"2:" }}$</p> <!-- Приклад ціни, можна додати реальну логіку -->
+            <button class="btn-secondary">Детальніше</button>
+        </div>
+        {% empty %}
+        <p>Популярних рейсів поки немає.</p>
+        {% endfor %}
     </div>
   </section>
 
@@ -126,9 +111,14 @@
 
 <script>
   flatpickr("#custom-date", {
-    dateFormat: "d F Y", // 28 February 2025
+    dateFormat: "d-m-Y",
+    
+    altInput: true,
+    altFormat: "d F Y",
+    
     defaultDate: new Date(),
     minDate: "today",
+    
     locale: {
       weekdays: {
         shorthand: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],

@@ -1,0 +1,258 @@
+body {
+  font-family: "Geologica", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  color: #242424;
+}
+
+.flights-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.flights-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  width: 100%;
+  justify-content: center;
+}
+
+.flight-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.flight-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  padding: 8px 16px;
+  background-color: #001226;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #242424;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 1024px) {
+  .flights-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .flights-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.login-link {
+  color: #000000;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.login-link:hover {
+  background-color: #b4b4b4;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.hero {
+  padding-left: 20px;
+  padding: 20px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.36)), url('images/flying.jpg');
+  background-size: cover;
+  background-position: center;
+  color: rgb(0, 0, 0);
+}
+
+.hero-title {
+  font-size: 76px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.hero-text {
+  font-size: 28px;
+  margin-bottom: 30px;
+  margin-left: 40px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  background-color: #004a87;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.btn-primary:hover {
+  background-color: #003366;
+}
+
+.search-section {
+  flex: 1;
+  max-width: 83%;
+  padding: 20px;
+  margin-left: 20px;
+  border-radius: 25px;
+}
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 40px;
+  padding: 20px;
+  background-color: #ffffffdd;
+  border-radius: 25px;
+}
+
+.trip-options {
+  display: flex;
+  gap: 15px;
+}
+
+.selected-trip {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.trip {
+  cursor: pointer;
+}
+
+.search-fields {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.search-form input[type="text"],
+.search-form input[type="date"] {
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  font-size: 1rem;
+  color: #333;
+  width: 100%;
+  font-family: "Geologica", sans-serif;
+}
+
+.search-form input[type="text"]:focus,
+.search-form input[type="date"]:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-form button {
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: #4578a0;
+  color: #fff;
+}
+
+.search-form button:hover {
+  background-color: #396689;
+}
+
+footer.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-bottom a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: #fff;
+}

@@ -1,23 +1,18 @@
-from email.utils import parsedate
 from django.contrib.auth import authenticate, login, logout
-from front_back.models import User
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import BookingForm
+from .forms import FlightSearchForm, BookingForm
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import Flight, Route, Seat, Booking, SeatClass, Service
-from datetime import datetime, timedelta
-from django.contrib.auth.hashers import make_password
+from .models import Flight, Seat, Booking, Service
+from datetime import datetime
 
-def time_to_timedelta(t):
-    return timedelta(hours=t.hour, minutes=t.minute, seconds=t.second, microseconds=t.microsecond)
+
 
 def index_view(request):
-    popular_routes = Route.objects.filter(is_popular=True)
-    print(popular_routes)
-    return render(request, "index.html", {"user": request.user, "popular_routes": popular_routes})
+    return render(request, "index.html", {"user": request.user})
 
 def home_view(request):
     return render(request, "index.html")
@@ -27,34 +22,28 @@ def account_view(request):
 
 def login_view(request):
     if request.method == "POST":
-        email = request.POST.get("email", "").strip()
-        password = request.POST.get("password", "")
-        
-        if not email or not password:
-            return render(request, "Account.html", {"error": "Заповніть усі поля"})
-        
-        user = authenticate(request, email=email, password=password)
-        
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
             return redirect("index")
         else:
-            return render(request, "Account.html", {"error": "Невірний email або пароль"})
-    
+            return render(request, "Account.html", {"error": "Невірний логін або пароль"})
+
     return render(request, "Account.html")
 
 def register_view(request):
     if request.method == "POST":
-        first_name = request.POST["first_name"]
-        last_name = request.POST["last_name"]
+        username = request.POST["username"]
         email = request.POST["email"]
         password = request.POST["password"]
-        passport_number = request.POST["passport_number"]
 
-        if User.objects.filter(email=email).exists():
+        if User.objects.filter(username=username).exists():
             return render(request, "Account.html", {"error": "Користувач вже існує"})
 
-        user = User.objects.create(first_name=first_name, last_name=last_name, passport_number=passport_number, email=email, password=make_password(password))
+        user = User.objects.create_user(username=username, email=email, password=password)
         login(request, user)
         return redirect("index")
 
@@ -62,33 +51,7 @@ def register_view(request):
 
 @login_required
 def profile_view(request):
-    # Отримуємо поточного користувача
-    user = request.user
-    
-    # Отримуємо всі бронювання зі статусом 'confirmed' для цього користувача
-    bookings = Booking.objects.filter(user=user, status='confirmed')
-    
-    # Створюємо список квитків із необхідною інформацією
-    tickets = []
-    for booking in bookings:
-        flight = booking.flight
-        seat = booking.seat
-        tickets.append({
-            'flight_date': flight.departure_time.strftime('%d %B, %A'),
-            'departure_time': flight.departure_time.strftime('%H:%M'),
-            'arrival_time': flight.arrival_time.strftime('%H:%M'),
-            'departure_city': flight.departure_city,
-            'arrival_city': flight.arrival_city,
-            'seat_number': seat.seat_number,
-            # Тут можна додати тривалість рейсу, якщо вона розраховується
-        })
-    
-    # Передаємо дані в контекст для шаблону
-    context = {
-        'user': user,
-        'tickets': tickets,
-    }
-    return render(request, 'profile.html', context)
+    return render(request, "profile.html", {"user": request.user})
 
 def place_view(request):
     return render(request, "place.html", {"user": request.user})
@@ -96,7 +59,7 @@ def place_view(request):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect("index")
+    return redirect("login")
 
 @login_required
 def book_flight(request, flight_id):
@@ -118,70 +81,23 @@ def book_flight(request, flight_id):
 def get_flights(request):
     departure = request.GET.get("departure")
     arrival = request.GET.get("arrival")
-    date_str = request.GET.get("date")
-    print(date_str)
+    date = request.GET.get("date")
 
-    if not departure or not arrival or not date_str:
-        return render(request, 'index.html', {'error': 'Недостатньо даних для пошуку'})
+    if not departure or not arrival or not date:
+        return JsonResponse({"error": "Недостатньо даних для пошуку"}, status=400)
 
     try:
-        parsed_date = datetime.strptime(date_str, "%d-%m-%Y").date()
+        parsed_date = datetime.strptime(date, "%d %B %Y").strftime("%Y-%m-%d")
     except ValueError:
-        return render(request, 'index.html', {'error': 'Неправильний формат дати'})
+        return JsonResponse({"error": "Неправильний формат дати"}, status=400)
 
     flights = Flight.objects.filter(
         route__departure__city=departure,
         route__arrival__city=arrival,
         departure_time__date=parsed_date
-    )
+    ).values("id", "aircraft", "departure_time")
 
-    flight_data = []
-    for flight in flights:
-        print("1")
-        route = flight.route
-        aircraft = flight.aircraft
-        departure_time = flight.departure_time
-
-        # Розрахунок часу прибуття
-        duration = route.duration_time
-        duration_td = time_to_timedelta(duration)
-        arrival_time = departure_time + duration_td
-
-        # Отримання класів сидінь та доступних місць
-        seat_classes = SeatClass.objects.filter(seat__aircraft=aircraft).distinct()
-        classes_data = []
-        for seat_class in seat_classes:
-            available_seats_count = Seat.objects.filter(
-                aircraft=aircraft,
-                class_type=seat_class,
-                status='available'
-            ).count()
-            price = seat_class.price_multiplier  # Припускаємо, що це ціна
-            classes_data.append({
-                "name": seat_class.name,
-                "available_seats": available_seats_count,
-                "price": price
-            })
-
-        flight_data.append({
-            "flight_id": flight.id,
-            "flight_number": route.flights_number,
-            "departure_time": departure_time,
-            "arrival_time": arrival_time,
-            "departure_city": route.departure.city,
-            "arrival_city": route.arrival.city,
-            "duration": duration,
-            "classes": classes_data
-        })
-
-    context = {
-        "flights": flight_data,
-        "departure": departure,
-        "arrival": arrival,
-        "date": parsed_date
-    }
-
-    return render(request, "booking.html", context)
+    return JsonResponse(list(flights), safe=False)
 
 
 def get_aircraft_seats(request, flight_id):
@@ -264,7 +180,7 @@ def search_flights(request):
         flights = Flight.objects.filter(
             from_city__iexact=from_city,
             to_city__iexact=to_city,
-            departure_date=parsedate(date)
+            departure_date=parse_date(date)
         )
 
         flights_data = [

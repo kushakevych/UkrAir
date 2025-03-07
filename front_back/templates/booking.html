@@ -1,237 +1,268 @@
 <!DOCTYPE html>
-<html lang="uk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <title>Авіакомпанія</title>
-  <link rel="stylesheet" href="static/bok.css">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/bok.css">
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo-container">
-      <div class="logo">UkrAirFly</div>
+  <div style="padding-top: 20px; background-color: #4578a0;">
+    <div style="margin-left: 100px; margin-right: 100px;">
+      <header class="navbar">
+        <div class="logo"><img src="/static/images/logo.svg" width="200" height="50"></div>
+        <nav class="nav-links">
+          <a href="#flights">Рейси</a>
+          <a href="#destinations">Напрямки</a>
+          <a href="#services">Послуги</a>
+          <a href="#contact">Контакти</a>
+        </nav>
+        <div class="login-container">
+          <a href="/account" class="login-link">Увійти</a>
+        </div>
+      </header>
     </div>
-    <nav class="nav-links">
-      <a href="#flights">Рейси</a>
-      <a href="#destinations">Напрямки</a>
-      <a href="#services">Послуги</a>
-      <a href="#contact">Контакти</a>
-    </nav>
-    <div class="login-container">
-      <a href="account" class="login-link">Увійти</a>
+  </div>
+  <div class="calendar">
+    <div class="calendar-wrapper">
+      <button id="scroll-left" class="scroll-btn"><i class="fa-solid fa-angle-left"></i></button>
+      <div id="calendar-container"></div>
+      <button id="scroll-right" class="scroll-btn"><i class="fa-solid fa-angle-right"></i></button>
     </div>
-  </header>
-  <div class="route-info">Київ-Пас → Львів, 24 лютого</div>
-
+  </div>
   <div class="content-container">
-    <div class="ticket-info">2 рейси від 251 ₴</div>
-    <div class="calendar">
-      <div class="calendar-header">
-        <span class="calendar-title">Березня 2025</span>
-      </div>
-      <div class="calendar-body">
-        <div class="calendar-day">
-          <span class="date">24</span>
-          <span class="weekday">Понеділок</span>
-        </div>
-        <div class="calendar-day">
-          <span class="date">25</span>
-          <span class="weekday">Вівторок</span>
-        </div>
-        <div class="calendar-day">
-          <span class="date">26</span>
-          <span class="weekday">Середа</span>
-        </div>
-        <div class="calendar-day">
-          <span class="date">27</span>
-          <span class="weekday">Четвер</span>
-        </div>
-        <div class="calendar-day">
-          <span class="date">28</span>
-          <span class="weekday">Пʼятниця</span>
-        </div>
-      </div>
-    </div>
+    <div style="padding-left: 140px;" class="route-info">{{ departure }} <i class="fa-solid fa-arrow-right"></i> {{ arrival }}, {{ date|date:"d F" }}</div>
+    <div style="padding-left: 140px; margin-bottom: 40px;" class="ticket-info">{{ flights|length }} рейси</div>
   </div>
   <div class="tickets-container">
+    {% for flight in flights %}
     <div class="ticket-card">
+      <div class="ticket-number"> Рейс №{{ flight.flight_number }}</div>
       <div class="ticket-header">
-        <span class="ticket-time">02:56</span>
-        <span class="ticket-duration">8 год 25 хв</span>
-        <span class="ticket-date">25 лютого</span>
+        <span class="ticket-time">{{ flight.departure_time|time:"H:i" }}</span>
+        <span class="ticket-time">{{ flight.arrival_time|time:"H:i" }}</span>
       </div>
       <div class="ticket-route">
-        <span class="ticket-route-from">Київ-Пас</span> → <span class="ticket-route-to">Львів</span>
+        <span class="ticket-route-from">{{ flight.departure_city }}</span>
+        <span class="ticket-duration"> {{ flight.duration.hour }} год {{ flight.duration.minute }} хв</span>
+        <span class="ticket-route-to">{{ flight.arrival_city }}</span>
       </div>
-      <div class="ticket-alternate">
-        <span class="ticket-alternate-from">Харків-Пас</span> → <span class="ticket-alternate-to">Львів</span>
-      </div>
-      <div class="ticket-footer">
-        <span class="ticket-price">697 ₴</span>
-      </div>
-    </div>
-  
-    <div class="ticket-card">
-      <div class="ticket-header">
-        <span class="ticket-time">04:10</span>
-        <span class="ticket-duration">6 год 55 хв</span>
-        <span class="ticket-date">25 лютого</span>
-      </div>
-      <div class="ticket-route">
-        <span class="ticket-route-from">Одеса</span> → <span class="ticket-route-to">Львів</span>
-      </div>
-      <div class="ticket-alternate">
-        <span class="ticket-alternate-from">Дніпро</span> → <span class="ticket-alternate-to">Львів</span>
-      </div>
-      <div class="ticket-footer">
-        <span class="ticket-price">850 ₴</span>
+      <div class="ticket-classes">
+        {% for class in flight.classes %}
+        <div class="ticket-class">
+            <span class="class-name">{{ class.name }}</span>
+            <span class="class-seats">Місць: {{ class.available_seats }}</span>
+            <span class="class-price">{{ class.price }} ₴</span>
+        </div>
+        {% endfor %}
       </div>
     </div>
-  
-    <div class="ticket-card">
-      <div class="ticket-header">
-        <span class="ticket-time">06:30</span>
-        <span class="ticket-duration">7 год 10 хв</span>
-        <span class="ticket-date">25 лютого</span>
-      </div>
-      <div class="ticket-route">
-        <span class="ticket-route-from">Харків</span> → <span class="ticket-route-to">Львів</span>
-      </div>
-      <div class="ticket-alternate">
-        <span class="ticket-alternate-from">Запоріжжя</span> → <span class="ticket-alternate-to">Львів</span>
-      </div>
-      <div class="ticket-footer">
-        <span class="ticket-price">920 ₴</span>
-      </div>
-    </div>
-  
-    <div class="ticket-card">
-      <div class="ticket-header">
-        <span class="ticket-time">08:20</span>
-        <span class="ticket-duration">5 год 45 хв</span>
-        <span class="ticket-date">25 лютого</span>
-      </div>
-      <div class="ticket-route">
-        <span class="ticket-route-from">Полтава</span> → <span class="ticket-route-to">Львів</span>
-      </div>
-      <div class="ticket-alternate">
-        <span class="ticket-alternate-from">Вінниця</span> → <span class="ticket-alternate-to">Львів</span>
-      </div>
-      <div class="ticket-footer">
-        <span class="ticket-price">750 ₴</span>
-      </div>
-    </div>
-  
-    <div class="ticket-card">
-      <div class="ticket-header">
-        <span class="ticket-time">10:00</span>
-        <span class="ticket-duration">6 год 30 хв</span>
-        <span class="ticket-date">25 лютого</span>
-      </div>
-      <div class="ticket-route">
-        <span class="ticket-route-from">Чернівці</span> → <span class="ticket-route-to">Львів</span>
-      </div>
-      <div class="ticket-alternate">
-        <span class="ticket-alternate-from">Рівне</span> → <span class="ticket-alternate-to">Львів</span>
-      </div>
-      <div class="ticket-footer">
-        <span class="ticket-price">800 ₴</span>
-      </div>
-    </div>
-  
-    <div class="ticket-card">
-      <div class="ticket-header">
-        <span class="ticket-time">12:15</span>
-        <span class="ticket-duration">7 год 50 хв</span>
-        <span class="ticket-date">25 лютого</span>
-      </div>
-      <div class="ticket-route">
-        <span class="ticket-route-from">Донецьк</span> → <span class="ticket-route-to">Львів</span>
-      </div>
-      <div class="ticket-alternate">
-        <span class="ticket-alternate-from">Миколаїв</span> → <span class="ticket-alternate-to">Львів</span>
-      </div>
-      <div class="ticket-footer">
-        <span class="ticket-price">900 ₴</span>
-      </div>
-    </div>
+    {% endfor %}
   </div>
-  <footer class="footer">
-    <div class="footer-bottom">
-      <p>&copy; 2025 UkrAirFly. Усі права захищено.</p>
-      <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
+  <div class="seats-container" style="display: none;">
+    <h2>Оберіть місце в літаку:</h2>
+    <div class="seat-map">
+      <div class="econom-seats">
+        <div class="row">
+          <div class="seat" data-seat="1A">1A</div>
+          <div class="seat" data-seat="2A">2A</div>
+          <div class="seat" data-seat="3A">3A</div>
+          <div class="seat" data-seat="4A">4A</div>
+          <div class="seat" data-seat="5A">5A</div>
+          <div class="seat" data-seat="6A">6A</div>
+          <div class="seat" data-seat="7A">7A</div>
+          <div class="seat" data-seat="8A">8A</div>
+          <div class="seat" data-seat="9A">9A</div>
+          <div class="seat" data-seat="10A">10A</div>
+          <div class="seat" data-seat="11A">11A</div>
+          <div class="seat" data-seat="12A">12A</div>
+        </div>
+        
+        <div class="row">
+          <div class="seat" data-seat="1B">1B</div>
+          <div class="seat" data-seat="2B">2B</div>
+          <div class="seat" data-seat="3B">3B</div>
+          <div class="seat" data-seat="4B">4B</div>
+          <div class="seat" data-seat="5B">5B</div>
+          <div class="seat" data-seat="6B">6B</div>
+          <div class="seat" data-seat="7B">7B</div>
+          <div class="seat" data-seat="8B">8B</div>
+          <div class="seat" data-seat="9B">9B</div>
+          <div class="seat" data-seat="10B">10B</div>
+          <div class="seat" data-seat="11B">11B</div>
+          <div class="seat" data-seat="12B">12B</div>
+        </div>
+        
+        <div class="row" style="margin-bottom: 20px;">
+          <div class="seat" data-seat="1C">1C</div>
+          <div class="seat" data-seat="2C">2C</div>
+          <div class="seat" data-seat="3C">3C</div>
+          <div class="seat" data-seat="4C">4C</div>
+          <div class="seat" data-seat="5C">5C</div>
+          <div class="seat" data-seat="6C">6C</div>
+          <div class="seat" data-seat="7C">7C</div>
+          <div class="seat" data-seat="8C">8C</div>
+          <div class="seat" data-seat="9C">9C</div>
+          <div class="seat" data-seat="10C">10C</div>
+          <div class="seat" data-seat="11C">11C</div>
+          <div class="seat" data-seat="12C">12C</div>
+        </div>
+        
+        <div class="row">
+          <div class="seat" data-seat="1D">1D</div>
+          <div class="seat" data-seat="2D">2D</div>
+          <div class="seat" data-seat="3D">3D</div>
+          <div class="seat" data-seat="4D">4D</div>
+          <div class="seat" data-seat="5D">5D</div>
+          <div class="seat" data-seat="6D">6D</div>
+          <div class="seat" data-seat="7D">7D</div>
+          <div class="seat" data-seat="8D">8D</div>
+          <div class="seat" data-seat="9D">9D</div>
+          <div class="seat" data-seat="10D">10D</div>
+          <div class="seat" data-seat="11D">11D</div>
+          <div class="seat" data-seat="12D">12D</div>
+        </div>
+        
+        <div class="row">
+          <div class="seat" data-seat="1E">1E</div>
+          <div class="seat" data-seat="2E">2E</div>
+          <div class="seat" data-seat="3E">3E</div>
+          <div class="seat" data-seat="4E">4E</div>
+          <div class="seat" data-seat="5E">5E</div>
+          <div class="seat" data-seat="6E">6E</div>
+          <div class="seat" data-seat="7E">7E</div>
+          <div class="seat" data-seat="8E">8E</div>
+          <div class="seat" data-seat="9E">9E</div>
+          <div class="seat" data-seat="10E">10E</div>
+          <div class="seat" data-seat="11E">11E</div>
+          <div class="seat" data-seat="12E">12E</div>
+        </div>
+        
+        <div class="row">
+          <div class="seat" data-seat="1F">1F</div>
+          <div class="seat" data-seat="2F">2F</div>
+          <div class="seat" data-seat="3F">3F</div>
+          <div class="seat" data-seat="4F">4F</div>
+          <div class="seat" data-seat="5F">5F</div>
+          <div class="seat" data-seat="6F">6F</div>
+          <div class="seat" data-seat="7F">7F</div>
+          <div class="seat" data-seat="8F">8F</div>
+          <div class="seat" data-seat="9F">9F</div>
+          <div class="seat" data-seat="10F">10F</div>
+          <div class="seat" data-seat="11F">11F</div>
+          <div class="seat" data-seat="12F">12F</div>
+        </div>
+      </div>
+      
+      <div class="bisnes-seats">
+        <div class="row">
+          <div class="seat" data-seat="1A">1A</div>
+          <div class="seat" data-seat="2A">2A</div>
+        </div>    
+        <div class="row" style="margin-bottom: 20px;">
+          <div class="seat" data-seat="1B">1B</div>
+          <div class="seat" data-seat="2B">2B</div>
+          <div class="seat" data-seat="3B">3B</div>
+        </div>    
+        <div class="row">
+          <div class="seat" data-seat="1C">1C</div>
+          <div class="seat" data-seat="2C">2C</div>
+          <div class="seat" data-seat="3C">3C</div>
+        </div>   
+        <div class="row">
+          <div class="seat" data-seat="1D">1D</div>
+          <div class="seat" data-seat="2D">2D</div>
+        </div>
+      </div>
     </div>
-  </footer>
-  <!-- Форма бронювання -->
-<div class="booking-modal">
-  <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <div class="ticket-price-info">
-          Базова ціна: <span class="ticket-price-value"></span> ₴
-      </div>
-
-      <h3>Додаткові послуги</h3>
-
-      <div class="extra-options">
-          <label><input type="checkbox" data-price="30"> Вода негазована (+30 ₴)</label>
-          <label><input type="checkbox" data-price="170"> Ланч з рибою та булгуром (+170 ₴)</label>
-          <label><input type="checkbox" data-price="160"> Ланч з куркою карі та рисом (+160 ₴)</label>
-          <label><input type="checkbox" data-price="18.79"> Квиток на багаж (+18.79 ₴)</label>
-          <label><input type="checkbox" data-price="18.79"> Квиток на улюбленця (+18.79 ₴)</label>
-      </div>
-
-      <div class="total-price">
-          Загальна сума: <span class="total-price-value"></span> ₴
-      </div>
-
-      <button class="continue-btn">Забронювати</button>
+    <button class="button-booking-back" style="margin-left: 160px;">Назад до рейсів</button><button class="button-booking-dali">Далі</button>
   </div>
-</div>
+  <div class="services-container" style="display: none;">
+    <h2>Оберіть додаткові послуги:</h2>
+    <div class="service-container">
+      <div class="card"><span class="card-title">Постіль</span><span class="card-price">+80 ₴</span> <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="card"><span class="card-title">Бойовий чай</span><span class="card-price">+30 ₴</span> <label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="card"><span class="card-title">Напій</span><span class="card-price">+10 ₴</span> <label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="card"><span class="card-title">Авторський чай</span><span class="card-price">+15 ₴</span> <label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="card"><span class="card-title">Дріп кава</span><span class="card-price">+30 ₴</span> <label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="card"><span class="card-title">Квиток на багаж</span><span class="card-price">+23.66 ₴</span> <label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="card"><span class="card-title">Квиток на улюбленця</span><span class="card-price">+23.66 ₴</span> <label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+    </div>
+    <button class="button-booking-back" style="margin-left: 160px;">Назад до мість</button><button class="button-booking-dali">До оплати</button>
+  </div>
+</body>
+<footer class="footer">
+  <div class="footer-bottom">
+    <p>&copy; 2025 UkrAirFly. Усі права захищено.</p>
+    <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
+  </div>
+</footer>
+</html>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const tickets = document.querySelectorAll(".ticket-card");
-  const modal = document.querySelector(".booking-modal");
-  const priceSpan = document.querySelector(".ticket-price-value");
-  const totalPriceSpan = document.querySelector(".total-price-value");
-  const checkboxes = document.querySelectorAll(".extra-options input[type='checkbox']");
-  const closeButton = document.querySelector(".close-btn");
+  document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById("calendar-container");
+      const btnLeft = document.getElementById("scroll-left");
+      const btnRight = document.getElementById("scroll-right");
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth();
 
-  let basePrice = 0;
+      // Масив місяців і днів тижня українською
+      const months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+      const days = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П’ятниця", "Субота"];
 
-  // Відкриття модального вікна
-  tickets.forEach(ticket => {
-      ticket.addEventListener("click", function () {
-          basePrice = parseFloat(this.querySelector(".ticket-price").textContent);
-          priceSpan.textContent = basePrice;
-          totalPriceSpan.textContent = basePrice.toFixed(2);
-          modal.classList.add("show");
+      // Генеруємо 20 днів, починаючи з сьогоднішнього
+      for (let i = 0; i < 20; i++) {
+          const dateObj = new Date(year, month, today.getDate() + i);
+          const dayOfWeek = days[dateObj.getDay()];
+          const day = dateObj.getDate();
+          const monthName = months[dateObj.getMonth()];
 
-          // Скидання вибраних опцій
-          checkboxes.forEach(cb => cb.checked = false);
-      });
-  });
+          // Створюємо контейнер дня
+          const dateElement = document.createElement("div");
+          dateElement.classList.add("calendar-day");
 
-  // Закриття модального вікна
-  closeButton.addEventListener("click", function () {
-      modal.classList.remove("show");
-  });
+          // Верхній текст — дата
+          const dateText = document.createElement("div");
+          dateText.classList.add("date");
+          dateText.textContent = `${day} ${monthName}`;
 
-  // Оновлення ціни при виборі додаткових послуг
-  checkboxes.forEach(checkbox => {
-      checkbox.addEventListener("change", function () {
-          let totalPrice = basePrice;
-          checkboxes.forEach(cb => {
-              if (cb.checked) {
-                  totalPrice += parseFloat(cb.dataset.price);
-              }
+          // Нижній текст — день тижня
+          const dayText = document.createElement("div");
+          dayText.classList.add("day");
+          dayText.textContent = dayOfWeek;
+
+          // Додаємо елементи в контейнер
+          dateElement.appendChild(dateText);
+          dateElement.appendChild(dayText);
+
+          // Виділяємо поточний день
+          if (i === 0) {
+              dateElement.classList.add("selected");
+          }
+
+          // Додаємо у контейнер
+          container.appendChild(dateElement);
+
+          // Клік для вибору дати
+          dateElement.addEventListener("click", () => {
+              document.querySelectorAll(".calendar-day").forEach(el => el.classList.remove("selected"));
+              dateElement.classList.add("selected");
           });
-          totalPriceSpan.textContent = totalPrice.toFixed(2);
+      }
+
+      // Додаємо прокрутку кнопками
+      btnLeft.addEventListener("click", () => {
+          container.scrollBy({ left: -300, behavior: "smooth" });
+      });
+
+      btnRight.addEventListener("click", () => {
+          container.scrollBy({ left: 300, behavior: "smooth" });
       });
   });
-});
 </script>
-
-</script>
-</body>
-</html>

@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/places.css">
+</head>
+<body>
+    <div class="card">
+        <h2>Маршрут: Київ → Львів, 1 березня, 08:00</h2>
+        <p>Номер поїзда: 899</p>
+        <p>Клас: 1 клас, 231 місце</p>
+        <p>Ціна: від 366 грн</p>
+        <p class="details btn-details">Деталі маршруту</p>
+    </div>
+
+    <!-- Форма вибору місць -->
+    <div class="seat-selection">
+        <h3></h3>
+        <div class="seat-grid">
+            <!-- Схема вагону -->
+            <!-- Вільні місця -->
+            <div class="seat" data-seat="1">1</div>
+            <div class="seat" data-seat="2">2</div>
+            <div class="seat booked" data-seat="3">3</div>
+            <div class="seat" data-seat="4">4</div>
+            <div class="seat" data-seat="5">5</div>
+            <div class="seat" data-seat="6">6</div>
+            <!-- (Продовжити заповнювати місця по аналогії) -->
+            <!-- Заброньовані місця -->
+            <div class="seat booked" data-seat="9">9</div>
+            <div class="seat" data-seat="24">24</div>
+            <div class="seat" data-seat="30">30</div>
+            <div class="seat" data-seat="31">31</div>
+            <!-- Особливе місце -->
+            <div class="seat special" data-seat="60">A</div>
+            <div class="seat booked" data-seat="111">111</div>
+            <div class="seat" data-seat="10">10</div>
+            <div class="seat" data-seat="12">12</div>
+            <div class="seat booked" data-seat="13">13</div>
+            <div class="seat" data-seat="14">14</div>
+            <div class="seat" data-seat="15">15</div>
+            <div class="seat" data-seat="16">16</div>
+            <!-- (Продовжити заповнювати місця по аналогії) -->
+            <!-- Заброньовані місця -->
+            <div class="seat booked" data-seat="19">19</div>
+            <div class="seat" data-seat="20">20</div>
+            <div class="seat" data-seat="21">21</div>
+            <div class="seat" data-seat="22">22</div>
+            <!-- Особливе місце -->
+            <div class="seat special" data-seat="27">A</div>
+            <div class="seat booked" data-seat="29">29</div>
+            <!-- (Продовжити заповнювати місця) -->
+        </div>
+
+        <div class="seat-list">
+            <h4>Обрані місця:</h4>
+            <ul id="selected-seats"></ul>
+        </div>
+
+        <button class="btn-continue" id="continueBtn" disabled>Продовжити</button>
+    </div>
+    <script>
+        // Обробка вибору місць
+        const seats = document.querySelectorAll('.seat');
+        const selectedSeatsList = document.getElementById('selected-seats');
+        const continueBtn = document.getElementById('continueBtn');
+        let selectedSeats = [];
+
+        // Перевірка на вибране місце
+        function toggleSeatSelection(seat) {
+            if (seat.classList.contains('booked')) return; // Місце заброньовано, не даємо вибирати
+
+            if (seat.classList.contains('selected')) {
+                // Знімаємо вибір
+                seat.classList.remove('selected');
+                selectedSeats = selectedSeats.filter(s => s !== seat.dataset.seat);
+            } else {
+                // Вибираємо місце
+                seat.classList.add('selected');
+                selectedSeats.push(seat.dataset.seat);
+            }
+
+            updateSelectedSeats();
+        }
+
+        // Оновлення списку обраних місць
+        function updateSelectedSeats() {
+            selectedSeatsList.innerHTML = '';
+            selectedSeats.forEach(seat => {
+                const li = document.createElement('li');
+                li.textContent = `Місце: ${seat}`;
+                selectedSeatsList.appendChild(li);
+            });
+
+            // Активуємо кнопку, якщо є вибрані місця
+            continueBtn.disabled = selectedSeats.length === 0;
+        }
+
+        // Додаємо обробник події на кожне місце
+        seats.forEach(seat => {
+            seat.addEventListener('click', () => toggleSeatSelection(seat));
+        });
+    </script>
+
+</body>
+</html>

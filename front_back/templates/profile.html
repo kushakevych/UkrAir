@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/kabinet.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div style="padding-top: 20px; background-color: #4578a0;">
+        <div style="margin-left: 100px; margin-right: 100px;">
+          <header class="navbar">
+            <div class="logo"><img src="/static/images/logo.svg" width="200" height="50"></div>
+            <nav class="nav-links">
+              <a href="#flights">Рейси</a>
+              <a href="#destinations">Напрямки</a>
+              <a href="#services">Послуги</a>
+              <a href="#contact">Контакти</a>
+            </nav>
+            <div class="login-container">
+                 <a href="{% url 'logout' %}" class="login-link">Вихід з акаунту</a>
+            </div>
+          </header>
+        </div>
+      </div>
+
+    <div class="user-section">
+        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+        <p>№ Паспорта: {{ user.passport_number }}</p>
+    </div>
+
+    <div class="tickets-section">
+        {% for ticket in tickets %}
+        <div class="flight-card">
+            <div class="flight-header">
+                <p class="flight-date">{{ ticket.flight_date }}</p>
+            </div>
+            <div class="flight-info">
+                <div class="time-info">
+                    <div class="time-item">
+                        <span class="time">{{ ticket.departure_time }}</span>
+                        <p class="city">{{ ticket.departure_city }}</p>
+                    </div>
+                    <div class="duration">
+                        <!-- Тривалість рейсу можна додати, якщо є відповідна логіка -->
+                        <!-- Наприклад: 1 год 3 хв -->
+                    </div>
+                    <div class="time-item">
+                        <span class="time">{{ ticket.arrival_time }}</span>
+                        <p class="city">{{ ticket.arrival_city }}</p>
+                    </div>
+                </div>
+                <div class="seat-info">
+                    <p>Місце: {{ ticket.seat_number }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p style="margin-left: 125px;">У вас поки що немає оплачених квитків.</p>
+        {% endfor %}
+    </div>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+          <p>© 2025 UkrAirFly. Усі права захищено.</p>
+          <p><a href="#">Політика конфіденційності</a> | <a href="#">Умови використання</a></p>
+        </div>
+    </footer>
+</body>
+</html>

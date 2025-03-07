@@ -1,0 +1,222 @@
+
+  
+  .flights-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  .flights-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .flight-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .flight-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .btn-secondary {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Адаптивність для мобільних пристроїв */
+  @media (max-width: 1024px) {
+    .flights-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .flights-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-left: 20px;
+}
+.user-info h3 {
+    margin-left: 15px;
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+}
+.user-info a {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.user-info a:hover {
+    background-color: #0056b3;
+}
+.user-section {
+    padding-left: 125px;
+    padding-right: 20px;
+}
+
+.user-section h3 {
+    font-size: 36px; /* Великий шрифт для "Ім'я Прізвище" */
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.user-section p {
+    font-size: 14px; /* Менший шрифт для "Змінити дані" */
+    margin-left: 15px; /* Зсув правіше */
+    margin-top: 5px; /* Невеликий відступ зверху */
+}
+
+.user-section p:first-of-type {
+    margin-top: -36px; /* Відсутній відступ зверху для першого елемента */
+}
+
+.user-section p:nth-of-type(2) {
+    margin-top: 50px; /* Відступ 50px для "Мої квитки" */
+}
+.user-section p {
+    font-size: 14px; /* Менший шрифт для "Змінити дані" */
+    margin-left: 15px;
+    margin-top: 5px; /* Відступ зверху */
+}
+
+.user-section .tickets-button {
+    font-size: 16px; /* Великий шрифт для "Мої квитки" */
+    background-color: #007bff; /* Синій фон кнопки */
+    color: white; /* Білий текст */
+    padding: 10px 20px; /* Відступи всередині кнопки */
+    border-radius: 5px; /* Заокруглені кути */
+    text-decoration: none; /* Без підкреслення */
+    display: inline-block; /* Кнопка буде в рядку */
+    margin-left: 15px;
+    margin-top: 50px; /* Відступ 50px від "Змінити дані" */
+    transition: background-color 0.3s ease; /* Плавний перехід кольору */
+}
+
+.user-section .tickets-button:hover {
+    background-color: #0056b3; /* Темніший синій колір при наведенні */
+}
+
+.tickets-section {
+    margin-top: 50px;
+    padding-left: 15px;
+}
+
+.tickets-button {
+    font-size: 16px; /* Великий шрифт для "Мої квитки" */
+    background-color: #007bff; /* Синій фон кнопки */
+    color: white; /* Білий текст */
+    padding: 10px 20px; /* Відступи всередині кнопки */
+    border-radius: 5px; /* Заокруглені кути */
+    text-decoration: none; /* Без підкреслення */
+    display: inline-block; /* Кнопка буде в рядку */
+    margin-left: 79px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease; /* Плавний перехід кольору */
+}
+
+.tickets-button:hover {
+    background-color: #0056b3; /* Темніший синій колір при наведенні */
+}
+
+.flight-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 36px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 53px;
+    width: 50%; /* Зменшуємо ширину картки до 50% */
+    margin-left: auto; /* Центруємо картку */
+    margin-right: auto; /* Центруємо картку */
+}
+
+
+.flight-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.flight-date {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.flight-info .time-info {
+    display: flex;
+    justify-content: space-between; /* Вирівнюємо елементи по горизонталі */
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.time-item {
+    text-align: center; /* Центруємо текст всередині кожного елемента */
+    font-size: 16px;
+}
+
+.duration {
+    font-size: 14px;
+    color: #888;
+    align-self: center; /* Розташовуємо тривалість по центру */
+    margin: 0 10px; /* Відстань між часами і тривалістю */
+}
+
+.city {
+    font-size: 18px;
+    margin-top: 5px;
+    color: #333;
+}
+
+
+.btn-show-ticket {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-show-ticket:hover {
+    background-color: #0056b3;
+}

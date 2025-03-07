@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профіль</title>
-    <link rel="stylesheet" href="static/accountcss.css">
+    <link rel="stylesheet" href="/static/accountcss.css">
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
+
 <body>
     <div class="container" id="main-container">
         <h2>Профіль</h2>
@@ -18,24 +21,32 @@
     </div>
 
     <!-- Форма Авторизації -->
-    <div class="form-container" id="loginForm">
+    <form class="form-container" id="loginForm" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
         <h2>Авторизація</h2>
-        <input type="text" placeholder="Логін" id="login-username">
-        <input type="password" placeholder="Пароль" id="login-password">
+        <input type="text" placeholder="Email" id="login-email" name="email" required>
+        <input type="password" placeholder="Пароль" id="login-password" name="password" required>
         <button class="submit-btn">Авторизуватись</button>
-        <button class="back-btn" id="backToMain1">Назад</button>
-    </div>
+        <button class="back-btn" id="backToMain1" type="submit">Назад</button>
+    </form>
 
     <!-- Форма Реєстрації -->
-    <div class="form-container" id="registerForm">
+    <form class="form-container" id="registerForm" method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
         <h2>Створити акаунт</h2>
-        <input type="text" placeholder="Логін" id="register-username">
-        <input type="email" placeholder="Email" id="register-email">
-        <input type="password" placeholder="Пароль" id="register-password">
-        <button class="submit-btn">Створити акаунт</button>
+        <input type="text" placeholder="І'мя" id="register-first_name" name="first_name" required>
+        <input type="text" placeholder="Прізвище" id="register-last_name" name="last_name" required>
+        <input type="text" placeholder="Номер паспорта" id="register-passport_number" name="passport_number" required>
+        <input type="email" placeholder="Email" id="register-email" name="email" required>
+        <input type="password" placeholder="Пароль" id="register-password" name="password" required>
+        <button type="submit" class="submit-btn">Створити акаунт</button>
         <button class="back-btn" id="backToMain2">Назад</button>
-    </div>
+    </form>
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
 
-    <script src="static/script.js"></script> <!-- Підключаємо JavaScript -->
+    <script src="/static/script.js"></script> <!-- Підключаємо JavaScript -->
 </body>
 </html>

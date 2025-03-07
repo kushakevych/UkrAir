@@ -1,41 +1,9 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #e3f2fd;
-    margin: 0;
-    padding: 0;
-}
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0277bd;
-    padding: 15px 20px;
-    color: white;
-}
+
 .logo {
     font-size: 24px;
     font-weight: bold;
 }
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
-}
-.nav-links a:hover {
-    text-decoration: underline;
-}
-.login-container .login-link {
-    background-color: white;
-    color: #0277bd;
-    padding: 8px 12px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 14px;
-}
-.login-container .login-link:hover {
-    background-color: #b3e5fc;
-}
+
 .ticket {
     background: white;
     padding: 20px;
@@ -45,24 +13,21 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     border-left: 5px solid #0288d1;
 }
-.date {
-    font-size: 20px;
-    font-weight: bold;
-    color: #01579b;
-    margin-bottom: 5px;
-}
+
 .price {
     color: #0288d1;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 .flight-details {
     font-size: 14px;
     color: #0277bd;
     line-height: 1.5;
     margin-bottom: 15px;
 }
+
 .button {
     display: block;
     text-align: center;
@@ -75,61 +40,122 @@ body {
     font-weight: bold;
     transition: background 0.3s ease;
 }
+
 .button:hover {
     background: #01579b;
 }
+
+.tickets-container {
+    padding-left: 240px;
+    padding-right: 260px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.ticket-classes {
+    display: flex;
+    gap: 10px; /* Відстань між класами */
+    height: 100%; /* Щоб блоки займали всю висоту */
+}
+
+.ticket-classes {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%; /* Щоб зайняти всю висоту ticket-card */
+    display: flex;
+    align-items: stretch; /* Розтягуємо всі картки по висоті */
+    gap: 20px; /* Відстань між класами */
+    padding: 20px; /* Додаємо відступ, щоб не злипалося */
+}
+
+.ticket-class {
+    background: none;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    width: 100px; /* Ширина квадрата */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 55px); /* Висота на всю картку мінус відступи */
+    position: relative; /* Для лінії */
+}
+
+/*.ticket-class:hover {
+    background-color: #e9e9e9;
+}*/
+
+.ticket-class:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -11px; /* Лінія буде між картками */
+    height: 100%;
+    width: 2px;
+    background-color: #ccc;
+}
+
+.class-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.class-seats{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.class-price {
+    font-weight: bold;
+    font-size: 22px;
+}
+
 .ticket-container {
     display: flex;
     justify-content: space-between;
-    gap: 30px; /* Відстань між квитками */
+    gap: 30px;
     margin: 20px auto;
     max-width: 1200px;
-    flex-wrap: wrap; /* Дозволяє елементам переноситися на новий рядок на маленьких екранах */
+    flex-wrap: wrap;
 }
 
 .ticket {
     background: white;
-    padding: 30px; /* Збільшене відступи для квитка */
+    padding: 30px;
     margin: 0;
-    width: 48%; /* Ширина квитка - зробить їх більш великими */
+    width: 48%;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     border-left: 5px solid #0288d1;
     display: flex;
-    flex-direction: column; /* Вирівнювання в колонку всередині квитка */
-    align-items: flex-start; /* Вирівнювання контенту ліворуч */
-}
-
-.date {
-    font-size: 24px; /* Більший шрифт */
-    font-weight: bold;
-    color: #01579b;
-    margin-bottom: 10px; /* Трохи більше простору між елементами */
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .price {
     color: #0288d1;
-    font-size: 22px; /* Більший шрифт для ціни */
+    font-size: 22px;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
 .flight-details {
-    font-size: 16px; /* Трохи більший шрифт для деталей рейсу */
+    font-size: 16px;
     color: #0277bd;
     line-height: 1.5;
-    margin-bottom: 20px; /* Більше простору під деталями рейсу */
+    margin-bottom: 20px;
 }
 
 .button {
     display: block;
     text-align: center;
-    padding: 12px 20px; /* Збільшені розміри кнопки */
+    padding: 12px 20px;
     background: #0277bd;
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 18px; /* Більший шрифт для кнопки */
+    font-size: 18px;
     font-weight: bold;
     transition: background 0.3s ease;
 }
@@ -137,12 +163,509 @@ body {
 .button:hover {
     background: #01579b;
 }
+
 .flight-image {
-    width: 100%; /* Зображення буде розтягнуте на всю ширину контейнера */
-    max-width: 300px; /* Максимальна ширина зображення */
-    height: auto; /* Пропорційне масштабування */
-    margin: -16px 0; /* Відступи зверху і знизу для зображення */
-    display: block; /* Виводить зображення як блоковий елемент */
-    border-radius: 5px; /* Заокруглені кути */
-    box-shadow: 0 px 8px rgba(0, 0, 0, 0.1); /* Тінь для зображення */
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: -16px 0;
+    display: block;
+    border-radius: 5px;
+    box-shadow: 0 px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стилі для календаря */
+.calendar {
+    padding: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 1px solid rgb(218, 218, 218);
+    max-width: 580px;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 100px;
+}
+
+.route-info {
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: #000000;
+  }
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ticket-info {
+    margin-top: 5px;
+  }
+
+  .ticket-card {
+    position: relative;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.ticket-card:hover {
+    background-color: #f8f8f8;
+}
+
+.ticket-number {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #0277bd; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    padding: 5px 12px;
+    border-radius: 15px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Header Section (Time, Duration, Date) */
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    max-width: 500px;
+}
+
+.ticket-time {
+    font-size: 34px;
+    font-weight: bold;
+    color: #0277bd;
+}
+
+.ticket-duration {
+    font-size: 14px;
+    color: #555;
+}
+
+.ticket-date {
+    font-size: 14px;
+    color: #0288d1;
+}
+
+/* Route Section */
+.ticket-route {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+    max-width: 500px;
+}
+
+/* Alternate Route */
+.ticket-alternate {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Footer Section (Price and Details Link) */
+.ticket-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.ticket-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0288d1;
+}
+
+.ticket-details-link {
+    font-size: 14px;
+    color: #0288d1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.ticket-details-link:hover {
+    text-decoration: underline;
+}
+
+
+
+footer.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .footer-bottom a {
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .footer-bottom a:hover {
+    color: #fff;
+  }
+  /* Стилі для модального вікна */
+.booking-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.booking-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.ticket-price-info {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.extra-options label {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.extra-options input {
+    margin-right: 10px;
+}
+
+.total-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #0277bd;
+}
+
+.continue-btn {
+    background-color: #0277bd;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.continue-btn:hover {
+    background-color: #01579b;
+}
+
+
+
+/* Контейнер для календаря */
+.calendar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+}
+
+/* Контейнер днів */
+#calendar-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    gap: 10px;
+    width: 80%;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+}
+
+/* Окремий день у календарі */
+.calendar-day {
+    min-width: 100px;
+    height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    background: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    padding: 5px;
+    text-align: center;
+}
+
+/* Верхній текст (дата) */
+.calendar-day .date {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Нижній текст (день тижня) */
+.calendar-day .day {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* Виділений день */
+.calendar-day.selected {
+    color: #0277bd;
+    box-shadow: inset 0 0 0 1px #0277bd;
+}
+
+.content-container {
+    border-bottom: 2px solid rgb(231, 231, 231);
+}
+
+/* Стрілки */
+.scroll-btn {
+    background: #ffffff;
+    color: rgb(128, 128, 128);
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.scroll-btn:hover {
+    background: #ebebeb;
+}
+
+.calendar-day:hover {
+    background: #ebebeb;
+}
+
+h2 {
+    margin-left: 160px;
+}
+
+.service-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-left: 140px;
+    padding-right: 140px;
+    padding-bottom: 30px;
+}
+.service-container .card {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    height: 65px;
+    position: relative;
+}
+.service-container .card-title {
+    font-weight: bold;
+}
+.service-container .card-price {
+    margin-top: 2px;
+}
+.service-container .toggle {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+.service-container .toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.service-container .slider {
+    position: absolute;
+    cursor: pointer;
+    top: -5px;
+    left: -5px;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.3s;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.service-container .slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+.service-container input:checked + .slider {
+    background-color: #0277bd;
+}
+.service-container input:checked + .slider:before {
+    transform: translateX(20px);
+}
+.service-container .button {
+    display: block;
+    width: 200px;
+    background: #0277bd;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.seat-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.seat-map .econom-seats,
+.seat-map .bisnes-seats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.seat-map .row {
+    display: flex;
+    justify-content: center;
+}
+
+.seat-map .seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    padding: 10px;
+    width: 15px;
+    height: 15px;
+    background-color: #46ace7;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 5px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
+
+.seat-map .seat:hover {
+    background-color: #6ec4fd;
+}
+
+.button-booking-dali {
+    background-color: #0277bd;
+    padding: 10px;
+    color: #ebebeb;
+    border: none;
+    font-family: "Geologica", sans-serif;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    width: 190px;
+    margin-left: 10px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-booking-dali:hover {
+    background-color: #4ca3d6;
+}
+
+.button-booking-dali:disabled {
+    cursor: not-allowed;
+    background-color: #005e94;
+
+}
+
+.button-booking-back {
+    background-color: #ffffff;
+    padding: 10px;
+    color: black;
+    border: none;
+    font-family: "Geologica", sans-serif;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    width: 190px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-booking-back:hover {
+    background-color: #ededed;
 }
